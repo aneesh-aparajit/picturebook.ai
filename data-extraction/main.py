@@ -5,7 +5,7 @@ import requests
 from lxml import etree
 import os
 
-df = pd.read_csv("../data/metadata/gutenberg_metadata.csv")
+df = pd.read_csv("../data/metadata/subset.csv")
 print(df.head())
 
 BASE_LINK = "https://www.gutenberg.org/"
@@ -16,7 +16,7 @@ HEADERS = {
 
 print(f"\nDOWNLOADING TXT FILES OF {len(df)} BOOKS.\n")
 
-for ix in tqdm(range(5000)):
+for ix in tqdm(range(len(df))):
     data = df.iloc[ix]
     book_id = data["Link"].split("/")[-1]
     url = BASE_LINK + "files/" + book_id
