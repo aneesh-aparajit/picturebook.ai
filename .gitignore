@@ -5,3 +5,4 @@ env3.9
 .vscode
 .idea
 txt_files
+.DS_Store
