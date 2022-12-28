@@ -6,3 +6,5 @@ transformers
 scipy
 ftfy
 bs4
+lxml
+pandas
