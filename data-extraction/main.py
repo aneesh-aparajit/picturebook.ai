@@ -32,9 +32,7 @@ for ix in tqdm(range(len(df))):
             with open(os.path.join(SAVE_DIR, link), "w") as f:
                 f.write(s.prettify())
         else:
-            book = requests.get(url + '/' + f'{book_id}/old/{book_id}.txt', headers=HEADERS)
-            s = bs(book.content, "html.parser")
-            with open(os.path.join(SAVE_DIR, f'{book_id}.txt'), "w") as f:
-                f.write(s.prettify())
+            pass
+
 
 print(f'\n\t\t\t\t\t\t\t\t\t\t\t\t\t******** COMPLETED *********')
