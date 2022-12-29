@@ -35,4 +35,4 @@ for ix in tqdm(range(len(df))):
             pass
 
 
-print(f'\n\t\t\t\t\t\t\t\t\t\t\t\t\t******** COMPLETED *********')
+print(f"\n\t\t\t\t\t\t\t\t\t\t\t\t\t******** COMPLETED *********")
