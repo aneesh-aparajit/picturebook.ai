@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .text2image import obtain_image
+from text2image import obtain_image
 from fastapi.responses import StreamingResponse
-from translate import Translator
+from googletrans import Translator
 import io
 
 
@@ -23,21 +23,37 @@ app = FastAPI(
 translator = Translator(from_lang="English", to_lang="Tamil")
 
 
-class TextInput(BaseModel):
-    prompt: str
-    seed: int = 42
-    num_iterface_steps: int = 51
-    guidance_scale: float = 7.5
+# class TextInput(BaseModel):
+#     prompt: str
+#     seed: int = 42
+#     num_iterface_steps: int = 51
+#     guidance_scale: float = 7.5
 
 
 @app.post("/english/text2text", tags=["English"])
-def generate_text(inputs: TextInput):
+def generate_text(
+    prompt: str,
+    seed: int = 42,
+    num_interface_steps: int = 51,
+    guidance_scale: float = 7.5,
+):
     return {"status": "To be completed..."}
 
 
 @app.post("/english/text2img", tags=["English"])
-def generate_img(inputs: TextInput):
-    image = obtain_image(**inputs.dict())
+def generate_img(
+    prompt: str,
+    seed: int = 42,
+    num_interface_steps: int = 51,
+    guidance_scale: float = 7.5,
+):
+    inputs = {
+        "prompt": prompt,
+        "seed": seed,
+        "num_interface_steps": num_interface_steps,
+        "guidance_scale": guidance_scale,
+    }
+    image = obtain_image(**inputs)
     memory_stream = io.BytesIO()
     image.save(memory_stream, format="PNG")
     memory_stream.seek(0)
@@ -45,15 +61,31 @@ def generate_img(inputs: TextInput):
 
 
 @app.post("/tamil/text2text", tags=["Tamil"])
-def generate_text(inputs: TextInput):
+def generate_text(
+    prompt: str,
+    seed: int = 42,
+    num_interface_steps: int = 51,
+    guidance_scale: float = 7.5,
+):
     return {"status": "To be completed..."}
 
 
 @app.post("/tamil/text2img", tags=["Tamil"])
-def generate_img(inputs: TextInput):
-    args = inputs.dict()
-    args["prompt"] = translator.translate(inputs.prompt)
-    image = obtain_image(**args)
+def generate_img(
+    prompt: str,
+    seed: int = 42,
+    num_interface_steps: int = 51,
+    guidance_scale: float = 7.5,
+):
+    inputs = {
+        "prompt": prompt,
+        "seend": seed,
+        "num_interface_steps": num_interface_steps,
+        "guidance_scale": guidance_scale,
+    }
+    inputs["prompt"] = translator.translate(inputs["prompt"])
+    print(inputs["prompt"])
+    image = obtain_image(**inputs)
     memory_stream = io.BytesIO()
     image.save(memory_stream, format="PNG")
     memory_stream.seek(0)

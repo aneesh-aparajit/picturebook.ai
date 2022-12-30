@@ -4,16 +4,15 @@ from PIL.Image import Image
 from pathlib import Path
 
 from diffusers import StableDiffusionPipeline
-from . import config
+import config
 
 
-token = open("./tokens.txt", "r").readlines()[0].strip()
-print(token)
+token = open("./token.txt", "r").readlines()[0].strip()
 
-pipeline = StableDiffusionPipeline(
+pipeline = StableDiffusionPipeline.from_pretrained(
     "CompVis/stable-diffusion-v1-4",
     revision="fp16",
-    torch_dtype=torch.float32,
+    torch_dtype=torch.float16,
     use_auth_token=token,
 )
 

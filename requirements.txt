@@ -10,4 +10,5 @@ lxml
 pandas
 fastapi[all]
 torch
-translate
+googletrans
+accelerate
