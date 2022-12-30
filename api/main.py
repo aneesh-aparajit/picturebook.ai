@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from text2image import obtain_image
+from .text2image import obtain_image
 from fastapi.responses import StreamingResponse
 from translate import Translator
 import io

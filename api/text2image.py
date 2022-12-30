@@ -1,14 +1,14 @@
 from __future__ import annotations
 import torch
-import diffusers
 from PIL.Image import Image
 from pathlib import Path
 
 from diffusers import StableDiffusionPipeline
-import config
+from . import config
 
-token_path = Path("../token.txt")
-token = token_path.read_text().strip()
+
+token = open("./tokens.txt", "r").readlines()[0].strip()
+print(token)
 
 pipeline = StableDiffusionPipeline(
     "CompVis/stable-diffusion-v1-4",
