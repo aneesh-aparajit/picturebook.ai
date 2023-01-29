@@ -11,7 +11,7 @@ def train_tokenizer(path, save_path):
         min_frequency=2, 
         special_tokens=['<s>', '<pad>', '</s>', '<unk>', '<mask>']
     )
-    tokenizer.save(save_path)
+    tokenizer.save_model(save_path) # make sure `save_path` already exists.
 
 
 if __name__ == '__main__':
